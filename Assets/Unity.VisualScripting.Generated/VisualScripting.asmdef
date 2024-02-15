@@ -1,0 +1,16 @@
+{
+    "name": "VisualScripting",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f9abbd8cc7a390d4c87c29954fb3cc3a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

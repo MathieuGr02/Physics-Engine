@@ -63,11 +63,11 @@ public class main : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Updates position of all movable (non static) objects
-    /// </summary>
-    /// <param name="o">ObjectType</param>
-    
+    public void DownwardsAcceleration(ObjectType o)
+    {
+        o.updateVelocity(Vector3.down * (gravity * Time.deltaTime));   
+        o.updatePosition(o.getVelocity() * Time.deltaTime);
+    }
     //
     //
     //Debug.Log(o.getVelocity());
@@ -110,7 +110,7 @@ public class main : MonoBehaviour
     private void SpherePlaneCollision(SphereObject sphere, PlaneObject plane)
     {
         var floorPosition = plane.getPosition().y;
-        if ((sphere.getPosition().y - sphere.radius < floorPosition) && !(sphere.getVelocity().y <= 0.01 && sphere.getVelocity().y >= 0.01))
+        if (sphere.getPosition().y - sphere.radius < floorPosition && sphere.getVelocity().y != 0)
         {
             var bounceVelocity = sphere.getVelocity() * bounceFriction;
             bounceVelocity.y *= -1;
@@ -120,16 +120,9 @@ public class main : MonoBehaviour
             floorSphere.y = floorPosition + sphere.radius;
             sphere.setPosition(floorSphere);
         }
-        else if (sphere.getVelocity().y <= floorPosition + 0.01 && sphere.getVelocity().y >= floorPosition - 0.01)
-        {
-            var rollVelocity = sphere.getVelocity() * ballRollFriction;
-            sphere.setVelocity(rollVelocity);
-            sphere.updatePosition(sphere.velocity * Time.deltaTime);
-        }
         else
         {
-            sphere.updateVelocity(Vector3.down * (gravity * Time.deltaTime));
-            sphere.updatePosition(sphere.getVelocity() * Time.deltaTime);
+            DownwardsAcceleration(sphere);
         }
     }
 
